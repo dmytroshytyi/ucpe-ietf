@@ -2,6 +2,36 @@
 
 # YANG data model for uCPE management
 
+Where:
+(IEEE) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ieee-dot1Q-types.yang - dot1.q and QinQ support
+
+https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-node-type%402020-02-14.yang - defines network node type
+
+(RFC 8529) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-network-instance%402019-01-21.yang - defines network instances (Switches) in the uCPE
+
+https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-ni-properties%402019-11-27.yang - adds switch properties (supporting node, dot1.q/QinQ, area(WAN/LAN))
+
+(RFC 8530) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-logical-network-element%402019-01-25.yang - adds logical network elements (VNFs) in the uCPE
+
+https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-lne-properties%402019-11-21.yang - VNF properties (supporting node, simple props(ram/cpu/disk) and ETSI SOL006 vnfd)
+
+(RFC 8345) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-network%402018-02-26.yang - defines the general networks and nodes
+
+(RFC 8345) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-network-topology%402018-02-26.yang - defines extensions of the networks - network topology
+
+(rfc8795) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-te-topology%402019-02-07.yang - TE (Traffic Engineering) network topology types as extention of network topologies
+
+https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-te-topology-sf%402019-11-03.yang - TE topology augmented with SF (VNFs) matrices for interconnection between VNFs, etc...
+
+https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-lt-virtual-link-id%402020-02-14.yang - SF matrices extension: Virtual link id between equipment and service function 
+
+(rfc8776) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-te-types%402019-11-18.yang - grouping/typedefs/identities as support for ietf-te
+
+and others...
+
+
+
+
 https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
 
    The uCPE as harware with x86
