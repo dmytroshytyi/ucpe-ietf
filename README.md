@@ -1,6 +1,6 @@
 # ucpe-ietf
 
-YANG data model for uCPE management
+# YANG data model for uCPE management
 
 https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
 
@@ -26,7 +26,7 @@ https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
 
 
 
- uCPE purpose
+ # uCPE purpose
 
    o  uCPE replaces multiple types of equipment (Node#1 - Node#5) with 1
       unit by virtualizing them as Virtual Network Functions on the top
@@ -59,7 +59,7 @@ https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
       configuration can be putted remotely.
 
 
-uCPE VNF ecosystem example
+# uCPE VNF ecosystem example
 
    uCPE supports a Virtual Network Funcitons of different type:
 
@@ -79,7 +79,7 @@ uCPE VNF ecosystem example
 
    o  Other...
    
-Internal uCPE service example
+# Internal uCPE service example
 
    The VNF in the uCPE could be a vRouter or vFirewall or an SD-WAN that
    is not a default part of virtual network resources of the uCPE.
