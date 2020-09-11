@@ -2,6 +2,124 @@
 
 # YANG data model for uCPE management https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
 
+Together modules represent this tree
+
+```
+module: ietf-network
+  +--rw networks
+     +--rw network* [network-id]                                        <<< networks
+        +--rw network-id            network-id
+        +--rw network-types
+        |  +--rw tet:te-topology!
+        |     +--rw tet-sf:sf!
+        +--rw supporting-network* [network-ref]
+        |  +--rw network-ref    -> /networks/network/network-id
+        +--rw node* [node-id]                                            <<< nodes
+           +--rw node-id                 node-id
+           +--rw supporting-node* [network-ref node-ref]                 <<< allows us to assing VNF nodes to physical (uCPE) nodes
+           |  +--rw network-ref    ->
+           |  |         ../../../supporting-network/network-ref
+           |  +--rw node-ref       -> /networks/network/node/node-id
+           +--rw nt:termination-point* [tp-id]                           <<< node ports
+           |  +--rw nt:tp-id                           tp-id
+           |  +--rw nt:supporting-termination-point*
+           |     |      [network-ref node-ref tp-ref]
+           |     +--rw nt:network-ref
+           |     |      -> ../../../nw:supporting-node/network-ref
+           |     +--rw nt:node-ref
+           |     |      -> ../../../nw:supporting-node/node-ref
+           |     +--rw nt:tp-ref
+           |            -> /nw:networks/network[nw:network-id=
+           |            current()/../network-ref]/node
+           |            [nw:node-id=current()/../node-ref]/
+           |            termination-point/tp-id
+           +--rw tet:te-node-id?         te-types:te-node-id
+           +--rw tet:te!
+           +--rw tet:te-node-template*
+              |         -> ../../../../te/templates/
+              |         node-template/name {template}?
+              +--rw tet:te-node-attributes
+                 |           
+                 +--rw tet-sf:service-function                            
+                    +--rw tet-sf:connectivity-matrices
+                    |  +--rw tet-sf:connectivity-matrix* [id]                    <<< Interconnection between VNF-VNF,VNF-SW,SW-phy-port, etc...
+                    |     +--rw tet-sf:id                 uint32
+                    |     +--rw tet-sf:from
+                    |     |  +--rw tet-sf:service-function-id?    string
+                    |     |  +--rw tet-sf:sf-connection-point-id? string
+                    |     +--rw tet-sf:to
+                    |     |  +--rw tet-sf:service-function-id?    string
+                    |     |  +--rw tet-sf:sf-connection-point-id? string
+                    |     +--rw tet-sf:enabled?           boolean
+                    |     +--rw tet-sf:direction? connectivity-direction
+                    |     +--rw tet-sf:virtual-link-id?   string
+                    +--rw tet-sf:link-terminations
+                       +--rw tet-sf:link-termination* [id]
+                          +--rw tet-sf:id           uint32
+                          +--rw tet-sf:from
+                          |  +--rw tet-sf:tp-ref?   -> ../../../../
+                          |     ../../../nt:termination-point/tp-id
+                          +--rw tet-sf:to
+                          |  +--rw tet-sf:service-function-id?    string
+                          |  +--rw tet-sf:sf-connection-point-id? string
+                          +--rw tet-sf:enabled?   boolean
+                          +--rw tet-sf:direction? connectivity-direction
+ietf-network-instance                                                            <<< Switches          
+  +--rw network-instances
+     +--rw network-instance* [name]
+        +--rw name                 string
+        +--rw enabled?             boolean
+        +--rw description?         string
+        +--rw (ni-type)?
+        +--rw (root-type)
+           +--:(vrf-root)
+           |  +--rw vrf-root
+           +--:(vsi-root)
+           |  +--rw vsi-root
+           |  +--rw ietf-ucpe-ni:network-instance-properties                     <<< Switch properties
+           |     +--rw ietf-ucpe-ni:sf-connection-points*
+           |     |  |              [sf-connection-point-id]
+           |     |  +--rw ietf-ucpe-ni:sf-connection-point-id
+           |     |  |              string
+           |     |  +--rw ietf-ucpe-ni:dot1q-vlan
+           |     |     +--rw ietf-ucpe-ni:access-tag?
+           |     |     |           d1q:vid-range
+           |     |     +--rw ietf-ucpe-ni:trunk-allowed-vlans?
+           |     |     |           d1q:vid-range
+           |     |     +--rw ietf-ucpe-ni:port-mode?
+           |     |                 enumeration
+           |     +--rw ietf-ucpe-ni:supporting-node?
+           |        -> /nw:networks/network/node/node-id
+           +--:(vv-root)
+              +--rw vv-root
+              
+   logical-network-elements                                                      <<< VNFs
+     +--rw logical-network-element* [name]
+        +--rw name           string
+        +--rw managed?       boolean
+        +--rw description?   string
+        +--rw root
+        +--rw logical-network-elements-properties                                <<< VNFs properties
+               +--rw sf-connection-points* [sf-connection-point-id]
+               |  +--rw sf-connection-point-id   string
+               +--rw vnfd                                                        <<< ETSI SOL006 vnfd
+               +--rw simplified-lne-props                                        <<< simple props
+               |  +--rw ram?           uint64
+               |  +--rw cpu?           uint64
+               |  +--rw storages* [id]
+               |     +--rw id          string
+               |     +--rw location?   string
+               +--rw day0-config                                                 <<< day0 config
+                  +--rw location?        string
+                  +--rw day0-var-path?   string
+                  +--rw variable* [name]
+                     +--rw name     string
+                     +--rw value?   string
+
+```
+
+
+
 Where:
 
 
@@ -45,9 +163,6 @@ https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-lt-virtual-link-
    - Virtual Network Function descriptor for Logical Elements.
    
 and others...
-
-
-
 
 
 
