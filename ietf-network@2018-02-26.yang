@@ -8,6 +8,12 @@ module ietf-network {
 	yang-version 1.1;
 	namespace "urn:ietf:params:xml:ns:yang:ietf-network";
 	prefix nw;
+	import  tailf-common {
+		prefix tailf;
+	}
+	import tailf-ncs {
+		prefix ncs;
+	}
 	import ietf-inet-types {
 		prefix inet;
 		reference
@@ -180,6 +186,9 @@ module ietf-network {
 								"Uniquely identifies a node within the containing
 							network.";
 							}
+
+							uses ncs:service-data;
+							ncs:servicepoint ietf-ucpe-servicepoint;
 
 							list supporting-node {
 								key "network-ref node-ref";
