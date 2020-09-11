@@ -42,31 +42,31 @@ module: ietf-network
                  |           
                  +--rw tet-sf:service-function                            
                     +--rw tet-sf:connectivity-matrices
-                    |  +--rw tet-sf:connectivity-matrix* [id]                    <<< Interconnection between VNF-VNF,VNF-SW,SW-phy-port, etc...
-                    |     +--rw tet-sf:id                 uint32
-                    |     +--rw tet-sf:from
-                    |     |  +--rw tet-sf:service-function-id?    string
+                    |  +--rw tet-sf:connectivity-matrix* [id]                    <<< Interconnection between VNF-VNF,VNF-SW,etc...
+                    |     +--rw tet-sf:id                 uint32                 
+                    |     +--rw tet-sf:from                                      
+                    |     |  +--rw tet-sf:service-function-id?    string         <<< VNF or Switch ID
                     |     |  +--rw tet-sf:sf-connection-point-id? string
                     |     +--rw tet-sf:to
-                    |     |  +--rw tet-sf:service-function-id?    string
+                    |     |  +--rw tet-sf:service-function-id?    string         <<< VNF or Switch ID
                     |     |  +--rw tet-sf:sf-connection-point-id? string
                     |     +--rw tet-sf:enabled?           boolean
                     |     +--rw tet-sf:direction? connectivity-direction
                     |     +--rw tet-sf:virtual-link-id?   string
                     +--rw tet-sf:link-terminations
                        +--rw tet-sf:link-termination* [id]
-                          +--rw tet-sf:id           uint32
+                          +--rw tet-sf:id           uint32                        
                           +--rw tet-sf:from
                           |  +--rw tet-sf:tp-ref?   -> ../../../../
-                          |     ../../../nt:termination-point/tp-id
+                          |     ../../../nt:termination-point/tp-id             <<< Phy port of equipment
                           +--rw tet-sf:to
-                          |  +--rw tet-sf:service-function-id?    string
+                          |  +--rw tet-sf:service-function-id?    string        <<< VNF or Switch ID
                           |  +--rw tet-sf:sf-connection-point-id? string
                           +--rw tet-sf:enabled?   boolean
                           +--rw tet-sf:direction? connectivity-direction
 ietf-network-instance                                                            <<< Switches          
   +--rw network-instances
-     +--rw network-instance* [name]
+     +--rw network-instance* [name]                                              <<< Switch ID
         +--rw name                 string
         +--rw enabled?             boolean
         +--rw description?         string
@@ -95,7 +95,7 @@ ietf-network-instance                                                           
               
    logical-network-elements                                                      <<< VNFs
      +--rw logical-network-element* [name]
-        +--rw name           string
+        +--rw name           string                                              <<< VNF ID
         +--rw managed?       boolean
         +--rw description?   string
         +--rw root
