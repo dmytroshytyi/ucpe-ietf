@@ -31,13 +31,15 @@ https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
    o  uCPE replaces multiple types of equipment (Node#1 - Node#5) with 1
       unit by virtualizing them as Virtual Network Functions on the top
       of NFVIs:
-
+```
      :      NODE #1     :   NODE #2 :  NODE #3  :NODE #4: NODE #5  :
      :    +-----------+ :  +------+ :  +------+ :  +--+ :  +-----+ :
   ...-----|Aggregation|----|CE-L2 |----| CE-L3|----|FW|----|SDWAN|---LAN
      :    |  switch   | :  |      | :  |      | :  |  | :  |     | :
      :    +-----------+ :  +------+ :  +------+ :  +--+ :  +-----+ :
+```
 
+```
     :      NODE #1   :           NODE #2                           :
     :                : +.........................................+ :
     :  +-----------+ : |  +------+    +------+    +--+   +-----+ | :
@@ -46,7 +48,7 @@ https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
     :  +-----------+ : |  +------+    +------+    +--+   +-----+ | :
     :                : |  universal Customer-Premises Equipment  | :
     :                : +-----------------------------------------+ :
-
+```
    o  uCPE falicitates the interconnection between the Network Funtions
       (NF) as interconnection between NF is performed via virtual
       links(that is part of the uCPE management).  That meens that no
