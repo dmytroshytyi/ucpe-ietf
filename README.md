@@ -40,7 +40,10 @@ https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-ucpe-lt-virtual-link-
 
 (rfc8776) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/ietf-te-types%402019-11-18.yang 
    - grouping/typedefs/identities as support for ietf-te
-
+   
+(ETSI SOL006) https://github.com/dmytroshytyi/ucpe-ietf/blob/master/submodules/etsi-nfv-vnf-deviation.yang
+   - Virtual Network Function descriptor for Logical Elements.
+   
 and others...
 
 
