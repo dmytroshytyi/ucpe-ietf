@@ -1,6 +1,6 @@
 # ucpe-ietf
 
-# YANG data model for uCPE management https://datatracker.ietf.org/doc/draft-shytyi-opsawg-vysm/
+# YANG data model for uCPE management
 
 Together modules represent this tree
 
